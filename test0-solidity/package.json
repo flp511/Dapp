@@ -1,0 +1,20 @@
+{
+    "name": "test0-solidity",
+    "version": "1.0.0",
+    "description": "",
+    "main": "truffle-config.js",
+    "directories": {
+        "test": "test"
+    },
+    "scripts": {
+        "generate-types": "typechain --target=ethers-v5 'build/contracts/*.json'"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "@typechain/ethers-v5": "^11.1.2",
+        "ethers": "5.7.2",
+        "typechain": "8.3.2"
+    }
+}
