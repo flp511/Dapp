@@ -28,3 +28,7 @@ RPC_URL在这里找：`https://dashboard.alchemy.com/apps/o5q3e0ejxm1evn22`
 PRIVATE_KEY是MetaMask上seplia的账号私钥
 
 重新部署
+
+
+#### git push error
+fatal: unable to access 'https://github.com/flp511/Dapp/': Failed to connect to github.com port 443 after 21069 ms: Timed out
