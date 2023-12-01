@@ -1,13 +1,23 @@
 const fs=require('fs-extra')
 const {ethers}=require('ethers')
+require('dotenv').config()
 
 async function main() {
-    const provider=new ethers.JsonRpcProvider('http://127.0.0.1:7545')
-    const wallet=new ethers.Wallet('0x24205d0617bdf92cb8284bab167e459238bbcb2199d22df839da38aca8d2656b', provider)
+    const provider=new ethers.JsonRpcProvider(process.env.RPC_URL)
+
+    // 方式一： ethers.Wallet ，不安全不推荐
+    // const wallet=new ethers.Wallet(process.env.PRIVATE_KEY, provider)
+
+    // 方式二：ethers.Wallet.fromEncryptedJsonSync，推荐
+    const encryptedJson=fs.readFileSync('./.encryptedKey.json')
+    let wallet=ethers.Wallet.fromEncryptedJsonSync(encryptedJson, process.env.PRIVATE_KEY_PASSWORD)
+    wallet=await wallet.connect(provider)
+
     const abi=fs.readFileSync('./SimpleStorage_sol_SimpleStorage.abi', 'utf8')
     const binary=fs.readFileSync('./SimpleStorage_sol_SimpleStorage.bin', 'utf8')
     const contractFactory=new ethers.ContractFactory(abi, binary, wallet)
     const contract=await contractFactory.deploy()
+    console.log("🚀 ~ file: deploy.js:20 ~ main ~ contract.target::", contract.target)
     const transactionReceipt=await contract.deploymentTransaction().wait(1)
     // console.log("🚀 ~ file: deploy.js:12 ~ main ~ contract:", transactionReceipt)
 
