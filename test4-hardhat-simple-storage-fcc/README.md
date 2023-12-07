@@ -77,6 +77,11 @@ chain文档：`https://www.chaijs.com/guide/styles/`
 
 运行命令：`yarn hardhat test`
 
+配置`gasReporter`后，运行测试命令，会得到gas的消耗，也可以输出报告
+文档地址：`https://www.npmjs.com/package/hardhat-gas-reporter`
+
+`solidity-coverage`得到测试覆盖率，运行命令：`yarn hardhat coverage`
+
 ##### note
 
 报错：`HardhatError: HH306: The 'address' parameter of task 'verify:etherscan' expects a value, but none was passed.` 可能因为合约地址为`undefined`

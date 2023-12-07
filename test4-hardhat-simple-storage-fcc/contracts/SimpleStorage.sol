@@ -26,4 +26,8 @@ contract SimpleStorage {
         people.push(People(_favoriteNumber, _name));
         nameToFavoriteNumber[_name] = _favoriteNumber;
     }
+
+    function getPersonNumber(string memory _name) public view returns (uint256) { // 返回的如果不是简单类型的值，要加memory，不然报错
+        return nameToFavoriteNumber[_name];
+    }
 }

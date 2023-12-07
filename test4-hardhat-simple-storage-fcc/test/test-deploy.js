@@ -22,4 +22,11 @@ describe('SimpleStorage', async function() {
         const expectedValue = '7'
         assert.equal((updateCurrentValue.toString()), expectedValue)
     })
+
+    it('添加person', async function() {
+        await simpleStorage.addPerson('fulp', 9);
+        await simpleStorage.deploymentTransaction().wait(1)
+        const num = await simpleStorage.getPersonNumber('fulp')
+        assert.equal(num.toString(), 9)
+    })
 })

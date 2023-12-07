@@ -2,11 +2,14 @@
 require("@nomicfoundation/hardhat-toolbox");
 require("@nomicfoundation/hardhat-verify");
 require("./tasks/block-number");
+require("hardhat-gas-reporter");
+require('solidity-coverage')
 
 require('dotenv').config()
 const SEPOLIA_RPC_URL = process.env.SEPOLIA_RPC_URL
 const SEPOLIA_PRIVATE_KEY = process.env.SEPOLIA_PRIVATE_KEY
 const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY
+const COINMARKETCAP_API_KEY = process.env.COINMARKETCAP_API_KEY
 
 module.exports = {
     defaultNetwork: "hardhat", // 默认指定该网络
@@ -26,6 +29,14 @@ module.exports = {
         // Your API key for Etherscan
         // Obtain one at https://etherscan.io/
         apiKey: ETHERSCAN_API_KEY
+    },
+    gasReporter: {
+        enabled: true,
+        outputFile: "gas-report.txt", // 去掉该字段，会展示在命令行中
+        currency: 'USD', // https://coinmarketcap.com/api/documentation/v1/#section/Standards-and-Conventions
+        coinmarketcap: COINMARKETCAP_API_KEY,
+        noColors: true, // 要输出到.txt的话，把这个开启
+        token: 'MATIC', //Ethereum 是默认网络，默认值：ETH
     },
     sourcify: {
         // Disabled by default
